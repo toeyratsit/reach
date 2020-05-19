@@ -1,0 +1,25 @@
+    body {
+        padding: 1em;
+        color: #ecf0f1;
+        background-color: #1B1548;
+        font-family: 'Kanit', sans-serif;
+    }
+    
+    #Sec-Page,
+    #Td-Page,
+    #Forth-Page {
+        display: none;
+    }
+    
+    .row {
+        padding: .5rem;
+    }
+    
+    #nav-date {
+        margin-top: .2rem;
+    }
+    
+    #nav-main {
+        font-style: white;
+        background-color: #FBFFC2;
+    }

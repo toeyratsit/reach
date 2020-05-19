@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>! Reach NEW</title>
+    <link rel="shortcut icon" type="image/png" href="https://cdn.pixabay.com/photo/2018/06/20/18/06/cash-3487046_960_720.png" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="myscript.js"></script>
+    <script src=""></script>
+    <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-light m-1" id="nav-main">
+        <span class="navbar-brand mb-0 h2 mx-auto">Reach</span>
+    </nav>
+
+    <div class="page" id="First-Page">
+        <h5 class="input-group m-4">กรอกชื่อของที่อยากได้</h5>
+        <div id="" class="m-4">
+            <input id="goalName" type="text" class="form-control " placeholder="" />
+        </div>
+
+        <h5 class="m-4">ราคา (บาท)</h5>
+        <div id="" class="m-4">
+            <input id="goalMoney" type="text" class="form-control " placeholder="" />
+        </div>
+
+        <h5 class="m-4">ต้องการใช้เวลาเก็บ</h5>
+        <div class="m-4">
+            <input id="start" type="date" class="form-control " aria-label="" aria-describedby="basic-addon1">
+        </div>
+
+        <h5 class="m-4">ถึง</h5>
+        <div class="m-4">
+            <input id="end" type="date" class="form-control" aria-label="" aria-describedby="basic-addon1">
+        </div>
+
+        <h5 class="m-4">เงินที่มีอยู่ตอนนี้ (บาท)</h5>
+        <div id="" class="m-4">
+            <input id="moneyNow" type="text" class="form-control " placeholder="" />
+        </div>
+        <div class="m-4">
+            <!-- <button type="button" class="btn btn-lg btn-success btn-block" onclick="addMore()">Add</button> -->
+            <button type="button" class="btn btn-lg btn-success btn-block" onclick="showList()">Next</button>
+        </div>
+    </div>
+
+
+    <div class="page" id="Sec-Page">
+
+        <!-- <h4 class="m-4" id="Topic"></h4>
+            <div id="Detail">
+                <h4>ยอดเงินทั้งหมด(บาท)</h4>
+                <div class="input-group mb-4">
+                    <input id="money_all" type="text" class="form-control " placeholder="" aria-label="" aria-describedby="basic-addon1">
+                </div>
+            </div>
+
+            <h4>ต้องการใช้เวลาเก็บ</h4>
+            <div class="input-group mb-4">
+                <input id="start" type="date" class="form-control " aria-label="" aria-describedby="basic-addon1">
+
+                <h4 style="padding: .3em;">ถึง</h4>
+                <input id="end" type="date" class="form-control " aria-label="" aria-describedby="basic-addon1">
+
+            </div>
+
+            <h4>เงินที่มีอยู่ตอนนี้</h4>
+            <div class="input-group mb-4">
+                <input id="money_remain" type="text" class="form-control " placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+            </div>
+
+            <div class="mx-auto">
+                <button type="button" class="btn btn-lg btn-success btn-block" onclick="Result()">Next</button>
+            </div> -->
+        <div class="m-4" id="showList">
+        </div>
+        <div class="m-4">
+            <!-- <button type="button" class="btn btn-lg btn-success btn-block" onclick="addMore()">Add</button> -->
+            <button type="button" class="btn btn-lg btn-success btn-block" onclick="Result()">คำนวณ</button>
+        </div>
+    </div>
+
+
+    <div class="page" id="Td-Page">
+        <div class="row">
+            <div class="col-6" id="nav-date">
+                <h3 class="" id="ShowDateStart"></h3>
+                <h3 class="" id="ShowDateEnd"></h3>
+            </div>
+            <div class="col-6" id="nav-date">
+                <h3 class="text-right" id="">เหลืออีก</h3>
+                <h3 class="text-right" id="CountDown">0d24hr</h3>
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="nav-date">
+            <hr>
+            <div class="col">
+                <h2 class="text-center">ต้องเก็บวันละ</h2>
+                <h2 class="text-center" id="calC"></h2>
+            </div>
+        </div>
+        <!-- <div class="mx-auto">
+            <button type="button" class="btn btn-lg btn-success btn-block" onclick=""></button>
+        </div> -->
+    </div>
+
+
+    <div class="page" id="Forth-Page">
+        <h4 class="m-4" id=""></h4>
+        <div id="">
+            <hr>
+            <h4 id="lastCal"></h4><br>
+            <h4 id=""></h4><br>
+            <h4 id=""></h4>
+        </div>
+        <div class="mx-auto">
+            <button type="button" class="btn btn-lg btn-success btn-block" onclick="mockupClick('Forth-Page', 'First-Page')">Next</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // function mockupClick(pageToHide, pageToShow) {
+        //     document.querySelector('#' + pageToHide).style.display = "none";
+        //     document.querySelector('#' + pageToShow).style.display = "block";
+        // }
+
+
+        // function ToCal() {
+        //     mockupClick('First-Page', 'Sec-Page');
+        //     document.getElementById("Topic").innerHTML = '<li>' + allGoals[0] + '</li>';
+        //     Detail.innerHTML += `
+        //             `;
+        // }
+
+        // if (localStorage.getItem("allGoals") === null) {
+        //     localStorage.setItem("allGoals", "[]");
+        // }
+        // allGoals = JSON.parse(localStorage.allGoals);
+        // display();
+
+
+        // function addMore() {
+        //     let thisGoal = prompt("ระบุเป้าหมาย")
+        //     if (thisGoal != null) {
+        //         allGoals.push(thisGoal)
+        //         console.log(allGoals);
+        //         display();
+        //     }
+        // }
+
+        // function display() {
+        //     InputGoal.innerHTML = "";
+        //     let i = 1;
+        //     for (aGoal of allGoals) {
+        //         InputGoal.innerHTML += `
+        //             <li class="list" onclick="" ondblclick="removeGoal(${i - 1})">
+        //             ${i}. ${aGoal}
+        //             </li>
+        //             `;
+        //         i++;
+        //     }
+        //     localStorage.setItem("allGoals", JSON.stringify(allGoals));
+        // }
+
+        // function removeGoal(index) {
+        //     remove = allGoals.splice(index, 1);
+        //     display();
+        // }
+
+
+        // function Result() {
+        //     var day_start = document.getElementById('start').value;
+        //     var day_end = document.getElementById('end').value;
+
+        //     var money_start = parseInt(document.getElementById('money_all').value);
+        //     var money_end = parseInt(document.getElementById('money_remain').value);
+
+
+        //     var date_start = new Date(day_start);
+        //     if (!!date_start.valueOf()) { // Valid date
+        //         var year = date_start.getFullYear();
+        //         var month = date_start.getMonth();
+        //         var day = date_start.getDate();
+        //     } else { /* Invalid date */ }
+
+        //     const date1 = new Date(day_start);
+        //     const date2 = new Date(day_end);
+        //     const diffTime = Math.abs(date2 - date1);
+        //     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        //     const count = parseInt((money_start - money_end) / diffDays);
+
+        //     mockupClick('Sec-Page', 'Td-Page')
+
+        //     document.getElementById("topic").innerHTML = allGoals[0];
+        //     document.getElementById("date").innerHTML = day_start + ' ถึง ' + day_end;
+        //     document.getElementById("done").innerHTML = 'ต้องเก็บเงินวันละ ' + count + ' บาท';
+
+
+        //     if (localStorage.getItem("dateCal") === null) {
+        //         localStorage.setItem("dateCal", "[]");
+        //     }
+        //     dateCal = JSON.parse(localStorage.dateCal);
+
+        //     if (document.getElementById("done") != null) {
+        //         var
+        //     }
+        // }
+
+
+
+
+
+
+        // // if (localStorage.getItem("dateCal") === null) {
+        // //     localStorage.setItem("dateCal", "[]");
+        // // }
+        // // dateCal = JSON.parse(localStorage.dateCal);
+
+
+        // function testStr() {
+
+        //     var getDateCal = [{
+        //         listDate: document.getElementById("done").value,
+        //         listProduc: document.getElementById("topic").value,
+        //     }];
+        //     localStorage.setItem("datelist", JSON.stringify(getDateCal));
+
+        // }
+
+
+        // function addDate() {
+        //     let thisdateCal = document.getElementById("done").value;
+        //     if (thisdateCal != null) {
+        //         dateCal.push(thisdateCal)
+        //         console.log(dateCal);
+        //         finished();
+        //     }
+        // }
+
+        // function finished() {
+        //     let i = 1;
+        //     for (aCal of dateCal) {
+        //         lastCal.innerHTML += `
+        //             <li class="list" onclick="" ondblclick="">
+        //             ${i}. ${aCal}
+        //             </li>
+        //             `;
+        //         i++;
+        //     }
+        //     localStorage.setItem("dateCal", JSON.stringify(dateCal));
+        // }
+    </script>
+
+</body>
+
+</html>
