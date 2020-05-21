@@ -131,53 +131,121 @@ function Result() {
                 EndToCal += getData[i].listNow;
         }
         var ToCal = parseInt((StartToCal - EndToCal) / days);
+        var minus = parseInt(EndToCal);
         document.getElementById("calC").innerHTML = ToCal + " บาท";
+        document.getElementById("minus").innerHTML = minus;
     }, 1000);
+
+
+    const form = document.querySelector('form')
+    const ul = document.querySelector('ul')
+    const button = document.querySelector('button')
+    const input = document.getElementById('item')
+    let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []
+
+    localStorage.setItem('items', JSON.stringify(itemsArray))
+    const data = JSON.parse(localStorage.getItem('items'))
+
+    const liMaker = text => {
+        const li = document.createElement('li')
+        li.textContent = text
+        ul.appendChild(li)
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault()
+
+        itemsArray.push(input.value)
+        localStorage.setItem('items', JSON.stringify(itemsArray))
+        liMaker(input.value)
+        input.value = ''
+    })
+
+    data.forEach(item => {
+        liMaker(item)
+    })
+
+    button.addEventListener('click', function() {
+        localStorage.clear()
+        while (ul.firstChild) {
+            ul.removeChild(ul.firstChild)
+        }
+    })
+
 }
 
-// var daycount = 1;
+//     if (localStorage.getItem("allGoals") === null) {
+//         localStorage.setItem("allGoals", "[]");
+//     }
+//     allGoals = JSON.parse(localStorage.allGoals);
+//     display();
 
-// var getData = JSON.parse(localStorage.getItem('datalist'));
-// var getonlyDateEnd = '';
-// for (i = 0; i < getData.length; i++) {
-//     getonlyDateEnd += getData[i].listDateEnd;
-// }
 
-// // Set the date we're counting down to
-// var countDownDate = new Date(getonlyDateEnd).getTime();
-
-// // Update the count down every 1 second
-// var x = setInterval(function() {
-
-//     // Get today's date and time
-//     var now = new Date().getTime();
-
-//     // Find the distance between now and the count down date
-//     var distance = countDownDate - now;
-
-//     // Time calculations for days, hours, minutes and seconds
-//     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-//     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-//     // Output the result in an element with id="demo"
-//     document.getElementById("CountDown").innerHTML = days + "d " + hours + "h " +
-//         minutes + "m " + seconds + "s ";
-
-//     // If the count down is over, write some text 
-//     if (distance < 0) {
-//         clearInterval(x);
-//         document.getElementById("CountDown").innerHTML = "EXPIRED";
+//     function addMore() {
+//         let thisGoal = prompt("ระบุเป้าหมาย")
+//         if (thisGoal != null) {
+//             allGoals.push(thisGoal)
+//             console.log(allGoals);
+//             display();
+//         }
 //     }
 
+//     function display() {
+//         InputGoal.innerHTML = "";
+//         let i = 1;
+//         for (aGoal of allGoals) {
+//             InputGoal.innerHTML += `
+//                 <li class="list" onclick="" ondblclick="removeGoal(${i - 1})">
+//                 ${i}. ${aGoal}
+//                 </li>
+//                 `;
+//             i++;
+//         }
+//         localStorage.setItem("allGoals", JSON.stringify(allGoals));
+//     }
+// }
 
 
 
 
 
+// if (localStorage.getItem("allGoals") === null) {
+//     localStorage.setItem("allGoals", "[]");
+// }
+// allGoals = JSON.parse(localStorage.allGoals);
+// display();
 
-// }, 1000);
+
+// function addMore() {
+//     let thisGoal = prompt("ระบุเป้าหมาย")
+//     if (thisGoal != null) {
+//         allGoals.push(thisGoal)
+//         console.log(allGoals);
+//         display();
+//     }
+// }
+
+// function display() {
+//     InputGoal.innerHTML = "";
+//     let i = 1;
+//     for (aGoal of allGoals) {
+//         InputGoal.innerHTML += `
+//             <li class="list" onclick="" ondblclick="removeGoal(${i - 1})">
+//             ${i}. ${aGoal}
+//             </li>
+//             `;
+//         i++;
+//     }
+//     localStorage.setItem("allGoals", JSON.stringify(allGoals));
+// }
+
+// function removeGoal(index) {
+//     remove = allGoals.splice(index, 1);
+//     display();
+// }
+
+
+
 
 
 
@@ -213,7 +281,7 @@ function testStr() {
 
 
 function showList() {
-    testStr()
+    // testStr()
     mockupClick('First-Page', 'Sec-Page')
     document.getElementById('showList').innerHTML;
     var getData = JSON.parse(localStorage.getItem('datalist'));
