@@ -3,50 +3,6 @@ function mockupClick(pageToHide, pageToShow) {
     document.querySelector('#' + pageToShow).style.display = "block";
 }
 
-
-function ToCal() {
-    // mockupClick('First-Page', 'Sec-Page');
-    // document.getElementById("Topic").innerHTML = '<li>' + allGoals[0] + '</li>';
-    // Detail.innerHTML += `
-    //         `;
-}
-
-// if (localStorage.getItem("allGoals") === null) {
-//     localStorage.setItem("allGoals", "[]");
-// }
-// allGoals = JSON.parse(localStorage.allGoals);
-// display();
-
-
-// function addMore() {
-//     let thisGoal = prompt("ระบุเป้าหมาย")
-//     if (thisGoal != null) {
-//         allGoals.push(thisGoal)
-//         console.log(allGoals);
-//         display();
-//     }
-// }
-
-// function display() {
-//     InputGoal.innerHTML = "";
-//     let i = 1;
-//     for (aGoal of allGoals) {
-//         InputGoal.innerHTML += `
-//             <li class="list" onclick="" ondblclick="removeGoal(${i - 1})">
-//             ${i}. ${aGoal}
-//             </li>
-//             `;
-//         i++;
-//     }
-//     localStorage.setItem("allGoals", JSON.stringify(allGoals));
-// }
-
-// function removeGoal(index) {
-//     remove = allGoals.splice(index, 1);
-//     display();
-// }
-
-
 function Result() {
     mockupClick('Sec-Page', 'Td-Page')
     var day_start = document.getElementById('start').value;
@@ -70,10 +26,6 @@ function Result() {
     const count = parseInt((money_start - money_end) / diffDays);
 
 
-
-    // document.getElementById("topic").innerHTML = allGoals[0];
-    // document.getElementById("date").innerHTML = day_start + ' ถึง ' + day_end;
-    // document.getElementById("calC").innerHTML = 'ต้องเก็บเงินวันละ ' + ' บาท';
     var getData = JSON.parse(localStorage.getItem('datalist'));
     var getonlyDateStart = '';
     var getonlyDateEnd = '';
@@ -85,6 +37,7 @@ function Result() {
 
     document.getElementById("ShowDateStart").innerHTML = getonlyDateStart;
     document.getElementById("ShowDateEnd").innerHTML = "ถึง " + getonlyDateEnd;
+
 
 
     var daycount = 1;
@@ -114,6 +67,7 @@ function Result() {
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Output the result in an element with id="demo"
+        document.getElementById("CountDown").style.color = "red";
         document.getElementById("CountDown").innerHTML = days + "d " + hours + "h " +
             minutes + "m " + seconds + "s ";
 
@@ -131,15 +85,15 @@ function Result() {
                 EndToCal += getData[i].listNow;
         }
         var ToCal = parseInt((StartToCal - EndToCal) / days);
-        var minus = parseInt(EndToCal);
+        var minus = parseInt(StartToCal - EndToCal);
         document.getElementById("calC").innerHTML = ToCal + " บาท";
-        document.getElementById("minus").innerHTML = minus;
+        document.getElementById("minus").innerHTML = minus + " บาท";
     }, 1000);
 
 
     const form = document.querySelector('form')
     const ul = document.querySelector('ul')
-    const button = document.querySelector('button')
+    const button = document.getElementById('clear')
     const input = document.getElementById('item')
     let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []
 
@@ -148,7 +102,7 @@ function Result() {
 
     const liMaker = text => {
         const li = document.createElement('li')
-        li.textContent = text
+        li.textContent = "เก็บแล้ว " + text + " บาท"
         ul.appendChild(li)
     }
 
@@ -159,6 +113,27 @@ function Result() {
         localStorage.setItem('items', JSON.stringify(itemsArray))
         liMaker(input.value)
         input.value = ''
+
+        var getData = JSON.parse(localStorage.getItem('datalist'));
+        var StartToCal = '';
+        var EndToCal = '';
+        for (i = 0; i < getData.length; i++) {
+
+            StartToCal += getData[i].listMoney,
+                EndToCal += getData[i].listNow;
+        }
+        var minus = parseInt(StartToCal - EndToCal);
+        var getData = JSON.parse(localStorage.getItem('items'));
+        var getList = 0;
+        for (i = 0; i < getData.length; i++) {
+            getList += parseInt(getData[i])
+        }
+        document.getElementById("show").innerHTML = "เก็บได้แล้ว " + getList + " บาท";
+
+        if (getList >= minus) {
+            document.getElementById("show").style.color = "green";
+            document.getElementById("show").innerHTML = "คุณเก็บเงินครบแล้ว " + getList + " บาท";
+        }
     })
 
     data.forEach(item => {
@@ -166,100 +141,13 @@ function Result() {
     })
 
     button.addEventListener('click', function() {
-        localStorage.clear()
+        localStorage.removeItem("items")
         while (ul.firstChild) {
             ul.removeChild(ul.firstChild)
         }
     })
 
 }
-
-//     if (localStorage.getItem("allGoals") === null) {
-//         localStorage.setItem("allGoals", "[]");
-//     }
-//     allGoals = JSON.parse(localStorage.allGoals);
-//     display();
-
-
-//     function addMore() {
-//         let thisGoal = prompt("ระบุเป้าหมาย")
-//         if (thisGoal != null) {
-//             allGoals.push(thisGoal)
-//             console.log(allGoals);
-//             display();
-//         }
-//     }
-
-//     function display() {
-//         InputGoal.innerHTML = "";
-//         let i = 1;
-//         for (aGoal of allGoals) {
-//             InputGoal.innerHTML += `
-//                 <li class="list" onclick="" ondblclick="removeGoal(${i - 1})">
-//                 ${i}. ${aGoal}
-//                 </li>
-//                 `;
-//             i++;
-//         }
-//         localStorage.setItem("allGoals", JSON.stringify(allGoals));
-//     }
-// }
-
-
-
-
-
-// if (localStorage.getItem("allGoals") === null) {
-//     localStorage.setItem("allGoals", "[]");
-// }
-// allGoals = JSON.parse(localStorage.allGoals);
-// display();
-
-
-// function addMore() {
-//     let thisGoal = prompt("ระบุเป้าหมาย")
-//     if (thisGoal != null) {
-//         allGoals.push(thisGoal)
-//         console.log(allGoals);
-//         display();
-//     }
-// }
-
-// function display() {
-//     InputGoal.innerHTML = "";
-//     let i = 1;
-//     for (aGoal of allGoals) {
-//         InputGoal.innerHTML += `
-//             <li class="list" onclick="" ondblclick="removeGoal(${i - 1})">
-//             ${i}. ${aGoal}
-//             </li>
-//             `;
-//         i++;
-//     }
-//     localStorage.setItem("allGoals", JSON.stringify(allGoals));
-// }
-
-// function removeGoal(index) {
-//     remove = allGoals.splice(index, 1);
-//     display();
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function testStr() {
@@ -273,11 +161,9 @@ function testStr() {
 
     }];
     localStorage.setItem("datalist", JSON.stringify(Default));
-    document.getElementById("showList").innerHTML = "hello";
 
 
 }
-
 
 
 function showList() {
@@ -295,8 +181,6 @@ function showList() {
                     <h4 class="m-4">เงินที่มีอยู่ตอนนี้ : ` + getData[i].listNow + ` บาท</h4>`;
     }
     document.getElementById('showList').innerHTML = getList;
-    // document.getElementById("showGoalName").innerHTML = "hello";
-    // mockupClick('Sec-Page', 'Td-Page')
 }
 
 

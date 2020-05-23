@@ -1,8 +1,11 @@
     body {
         padding: 1em;
-        color: #ecf0f1;
-        background-color: #1B1548;
+        color: black;
+        background-color: #f5cd7a;
         font-family: 'Kanit', sans-serif;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
     }
     
     #Sec-Page,
@@ -22,4 +25,15 @@
     #nav-main {
         font-style: white;
         background-color: #FBFFC2;
+    }
+    
+    #show {
+        margin-top: .5em;
+        padding: .3rem;
+    }
+    
+    #dateTop {
+        background-color: rgb(251, 255, 194, 0.3);
+        margin-inline-end: .2em;
+        margin-inline-start: .2em;
     }
