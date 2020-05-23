@@ -167,7 +167,7 @@ function testStr() {
 
 
 function showList() {
-    // testStr()
+    testStr()
     mockupClick('First-Page', 'Sec-Page')
     document.getElementById('showList').innerHTML;
     var getData = JSON.parse(localStorage.getItem('datalist'));
