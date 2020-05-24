@@ -132,7 +132,7 @@ function Result() {
 
         if (getList >= minus) {
             document.getElementById("show").style.color = "green";
-            document.getElementById("show").innerHTML = "คุณเก็บเงินครบแล้ว " + getList + " บาท";
+            document.getElementById("show").innerHTML = "คุณเก็บเงินครบแล้ว " + getList + " บาท 🎉🎈🎊";
         }
     })
 
