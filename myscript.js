@@ -3,8 +3,32 @@ function mockupClick(pageToHide, pageToShow) {
     document.querySelector('#' + pageToShow).style.display = "block";
 }
 
+window.onload = function() {
+    if (localStorage.getItem("datalist") != null) {
+        mockupClick('First-Page', 'Td-Page')
+        this.Result()
+    }
+}
+
+
 function Result() {
     mockupClick('Sec-Page', 'Td-Page')
+    window.onload = function() {
+        if (window.localStorage) {
+            if (!localStorage.getItem('datalist')) {
+                localStorage['datalist'] = true;
+                window.location.reload();
+                this.Result()
+
+            } else {
+                mockupClick('First-Page', 'Td-Page')
+                this.Result()
+            }
+            mockupClick('First-Page', 'Td-Page')
+            this.Result()
+        }
+    }
+
     var day_start = document.getElementById('start').value;
     var day_end = document.getElementById('end').value;
 
@@ -90,7 +114,6 @@ function Result() {
         document.getElementById("minus").innerHTML = minus + " บาท";
     }, 1000);
 
-
     const form = document.querySelector('form')
     const ul = document.querySelector('ul')
     const button = document.getElementById('clear')
@@ -141,17 +164,17 @@ function Result() {
     })
 
     button.addEventListener('click', function() {
-        localStorage.removeItem("items")
+        localStorage.clear();
         while (ul.firstChild) {
             ul.removeChild(ul.firstChild)
         }
+        mockupClick('Td-Page', 'First-Page')
     })
-
 }
 
 
-function testStr() {
-
+function showList() {
+    mockupClick('First-Page', 'Sec-Page')
     var Default = [{
         listProduct: document.getElementById("goalName").value,
         listMoney: document.getElementById("goalMoney").value,
@@ -161,15 +184,6 @@ function testStr() {
 
     }];
     localStorage.setItem("datalist", JSON.stringify(Default));
-
-
-}
-
-
-function showList() {
-    testStr()
-    mockupClick('First-Page', 'Sec-Page')
-    document.getElementById('showList').innerHTML;
     var getData = JSON.parse(localStorage.getItem('datalist'));
     var getList = '';
     for (i = 0; i < getData.length; i++) {
